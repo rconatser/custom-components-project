@@ -27,3 +27,11 @@ npm run lint
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
+# My Notes
+
+## Used Vue CLI (Version 3.11.0)
+
+## Used Vuetify Components (Version 2.0.18)
+
+## Used Webpack (Version 4.40.2)
