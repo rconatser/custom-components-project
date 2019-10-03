@@ -14,7 +14,7 @@
         >
           <!-- .col-12 .col-md-8 -->
           <h3 class="font-weight-light text-uppercase">Server One</h3>
-          <h4 class="font-weight-normal">Status: </h4>
+          <h4 class="font-weight-normal">Status: {{ serverStatus }}</h4>
         </v-card>
       </v-col>
       <v-col
@@ -28,7 +28,7 @@
         >
           <!-- .col-12 .col-md-8 -->
           <h3 class="font-weight-light text-uppercase">Server Two</h3>
-          <h4 class="font-weight-normal">Status: </h4>
+          <h4 class="font-weight-normal">Status: {{ serverStatus }}</h4>
         </v-card>
       </v-col>
       <v-col
@@ -41,7 +41,7 @@
         >
           <!-- .col-6 .col-md-4 -->
           <h3 class="font-weight-light text-uppercase">Server Three</h3>
-          <h4 class="font-weight-normal">Status: </h4>
+          <h4 class="font-weight-normal">Status: {{ serverStatus }}</h4>
         </v-card>
       </v-col>
     </v-row>
@@ -57,7 +57,7 @@
           :elevation="hover ? 12 : 6"
         >
           <h3 class="font-weight-light text-uppercase">Server Four</h3>
-          <h4 class="font-weight-normal">Status: </h4>
+          <h4 class="font-weight-normal">Status: {{ serverStatus }}</h4>
         </v-card>
       </v-col>
       <v-col
@@ -70,7 +70,7 @@
         >
           <!-- .col-6 -->
           <h3 class="font-weight-light text-uppercase">Server Five</h3>
-          <h4 class="font-weight-normal">Status: </h4>
+          <h4 class="font-weight-normal">Status: {{ serverStatus }}</h4>
         </v-card>
       </v-col>
     </v-row>
@@ -78,9 +78,33 @@
 </template>
 
 <script>
+import { eBus } from "../../main.js";
+
 export default {
-    
+    props: {
+      serverNumber: Number
+    },
+    data: () => ({
+      status: ""
+    }),
+    created() {
+      this.id = this.serverNumber;
+      let serverStatus = [
+        "Server is live and working.",
+        "Server is down",
+        "Server Status Unknown"
+      ];
+      this.status = serverStatus[Math.floor(Math.random() * serverStatus.length)
+      ];
+    },
+    methods: {
+      DisplayStatus() {
+        eBus.$emit("DisplayServerStatus", {
+          status: this.status
+        });
+      }
 }
+};
 </script>
 
 <style scoped>
@@ -88,8 +112,8 @@ export default {
         min-width: 360px;
         max-width: 1200px;
     }
-
+/* 
     v-card {
 
-    }
+    } */
 </style>
