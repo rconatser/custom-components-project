@@ -4,9 +4,9 @@ import vuetify from './plugins/vuetify';
 
 Vue.config.productionTip = false
 
+export const eBus = new Vue();
+
 new Vue({
   vuetify,
   render: h => h(App)
 }).$mount('#app')
-
-export const eBus = new Vue();
